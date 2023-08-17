@@ -1,35 +1,22 @@
 <script lang="ts">
-	import { ChatGPTUnofficialProxyAPI } from 'chatgpt';
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
-	import { access_token, api_reverse_proxy_url } from '../../store';
+	import { ChatBot } from '$lib/chatbot';
 
 	let token: string;
 	let proxy = 'https://ai.fakeopen.com/api/conversation';
 
 	let auth_failed = false;
 
-	function handleSubmit() {
-		try {
-			let api = new ChatGPTUnofficialProxyAPI({
-				accessToken: token,
-				apiReverseProxyUrl: proxy
+	async function handleSubmit() {
+		ChatBot.login(token, proxy)
+			.then(() => {
+				goto(base + '/');
+			})
+			.catch((error) => {
+				console.log(error);
+				auth_failed = true;
 			});
-
-			api.sendMessage('LTP login')
-				.then(() => {
-					access_token.set(token);
-					api_reverse_proxy_url.set(proxy);
-					goto(base + '/');
-				})
-				.catch((err) => {
-					console.log(err);
-					auth_failed = true;
-				});
-		} catch (err) {
-			console.log(err);
-			auth_failed = true;
-		}
 	}
 </script>
 
