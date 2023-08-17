@@ -15,6 +15,8 @@
 		"@sveltejs/adapter-static": "^2.0.3",
 		"@sveltejs/kit": "^1.20.4",
 		"@tailwindcss/typography": "^0.5.9",
+		"@types/events": "^3.0.0",
+		"@types/node": "^20.5.0",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"autoprefixer": "^10.4.15",
@@ -35,6 +37,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"chatgpt": "^5.2.5"
+		"chatgpt": "^5.2.5",
+		"events": "^3.3.0"
 	}
 }
