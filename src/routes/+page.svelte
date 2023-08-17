@@ -2,6 +2,7 @@
 	import { beforeUpdate, afterUpdate } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
+	import { ChatAPI } from '$lib/chatapi';
 	import { ChatBot } from '$lib/chatbot';
 	import Bubble from './bubble.svelte';
 
@@ -10,6 +11,7 @@
 		content: string;
 	};
 
+	let chatapi: ChatAPI;
 	let chatbot: ChatBot;
 
 	let logs_visual: Array<LogVisual> = [];
@@ -18,7 +20,8 @@
 
 	beforeUpdate(async () => {
 		try {
-			chatbot = ChatBot.getInstance();
+			chatapi = ChatAPI.getInstance();
+			chatbot = new ChatBot(chatapi);
 		} catch (error) {
 			console.log(error);
 			goto(base + '/login');
@@ -35,7 +38,7 @@
 		logs_visual = [...logs_visual, log];
 
 		// Get chatbot response
-		chatbot
+		chatapi
 			.sendMessage(question)
 			.then((res) => {
 				const log_res: LogVisual = { isUser: false, content: res.text };

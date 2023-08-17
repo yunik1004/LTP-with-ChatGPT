@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
-	import { ChatBot } from '$lib/chatbot';
+	import { ChatAPI } from '$lib/chatapi';
 
 	let token: string;
 	let proxy = 'https://ai.fakeopen.com/api/conversation';
@@ -9,7 +9,7 @@
 	let auth_failed = false;
 
 	async function handleSubmit() {
-		ChatBot.login(token, proxy)
+		ChatAPI.login(token, proxy)
 			.then(() => {
 				goto(base + '/');
 			})
