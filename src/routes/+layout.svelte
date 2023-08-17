@@ -7,7 +7,7 @@
 <div class="flex flex-col h-screen">
 	<Navbar />
 
-	<div class="container mx-auto grow">
+	<div class="container mx-auto p-2 pb-2 grow">
 		<slot />
 	</div>
 
