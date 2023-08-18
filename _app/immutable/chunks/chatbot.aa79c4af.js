@@ -1,11 +1,11 @@
-var d=Object.defineProperty;var o=(n,t,i)=>t in n?d(n,t,{enumerable:!0,configurable:!0,writable:!0,value:i}):n[t]=i;var e=(n,t,i)=>(o(n,typeof t!="symbol"?t+"":t,i),i);import{h as c}from"./singletons.ff48ecff.js";const v=c("goto"),m=`안녕하세요 저는 바다거북 스프 문제를 출제하는 바다거북이에요.
-문제를 듣고 싶다면 저에게 말씀해주세요.`,p="오류가 발생했어요",f="질문을 입력해주세요",_=`바다거북 스프 게임은 다음과 같이 진행됩니다.
+var d=Object.defineProperty;var o=(a,t,s)=>t in a?d(a,t,{enumerable:!0,configurable:!0,writable:!0,value:s}):a[t]=s;var i=(a,t,s)=>(o(a,typeof t!="symbol"?t+"":t,s),s);import{h as c}from"./singletons.8fd85d66.js";const m=c("goto"),v=`안녕하세요! 저는 바다거북 수프 문제를 출제하는 바다거북이에요.
+문제를 듣고 싶다면 '!문제'를 입력해주세요.`,p="오류가 발생했어요",l="질문을 입력해주세요",f="!문제",u="위의 형식을 따르는 수수께끼를 출제해주세요",_=`바다거북 수프 게임은 다음과 같이 진행됩니다.
 
     1. 출제자가 (이야기 형식의) 수수께끼를 만들어 출제한다.
     2. 참가자들은 출제자에게 스무고개 형식의 질문을 하고, 출제자는 그에 대한 대답을 한다.
     3. 정보를 통해 참가자들은 이야기의 전말을 추리한다.
 
-예를 들어, 문제는 다음과 같다.
+예를 들어, 문제는 다음과 같습니다.
 
     한 남자가, 어느 바닷가 레스토랑에서 바다거북 수프를 주문했으며 그 남자는 바다거북 수프를 한 수저 먹고는 주방장을 불렀다.
     “죄송합니다. 이거 정말로 바다거북 수프인가요?”
@@ -28,5 +28,4 @@ var d=Object.defineProperty;var o=(n,t,i)=>t in n?d(n,t,{enumerable:!0,configura
     남자가 자살한 것은 스프를 먹은 것이 원인입니까? → 네! 아주 중요합니다!
     주방장은 남자입니까? → 상관없습니다.
 
-
-이러한 방식으로 게임을 진행하고 싶습니다. 이해했습니까?`,s=class s{constructor(t,i,a){e(this,"chatapi");e(this,"thread_conv_id");e(this,"thread_init_msg_id");e(this,"thread_prev_msg_id");this.chatapi=t,this.thread_conv_id=i,this.thread_init_msg_id=a,this.thread_prev_msg_id=a}static async initialize(t){const i=await t.sendMessage(_);if(i.conversationId===void 0)throw Error("conversationId is not found");s.instance=new s(t,i.conversationId,i.id)}static getInstance(){if(!s.instance)throw new Error("No instance");return s.instance}resetThread(){this.thread_prev_msg_id=this.thread_init_msg_id}async sendThreadMessage(t){const i=await this.chatapi.sendMessage(t,{conversationId:this.thread_conv_id,parentMessageId:this.thread_prev_msg_id,action:"next"});return this.thread_prev_msg_id=i.id,i.text}};e(s,"instance");let r=s;export{r as C,m as a,p as e,v as g,f as i};
+이러한 방식으로 게임을 진행하고 싶습니다. 이해했습니까?`,e=class e{constructor(t,s,n){i(this,"chatapi");i(this,"thread_conv_id");i(this,"thread_init_msg_id");i(this,"thread_prev_msg_id");this.chatapi=t,this.thread_conv_id=s,this.thread_init_msg_id=n,this.thread_prev_msg_id=n}static async initialize(t){const s=await t.sendMessage(_);if(s.conversationId===void 0)throw Error("conversationId is not found");e.instance=new e(t,s.conversationId,s.id)}static getInstance(){if(!e.instance)throw new Error("No instance");return e.instance}resetThread(){this.thread_prev_msg_id=this.thread_init_msg_id}async sendThreadMessage(t){const s=await this.chatapi.sendMessage(t,{conversationId:this.thread_conv_id,parentMessageId:this.thread_prev_msg_id,action:"next"});return this.thread_prev_msg_id=s.id,s.text}};i(e,"instance");let r=e;export{r as C,v as a,f as c,p as e,m as g,l as i,u as q};
