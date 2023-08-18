@@ -3,9 +3,10 @@
 	import { base } from '$app/paths';
 	import { ChatAPI } from '$lib/chatapi';
 	import { ChatBot } from '$lib/chatbot';
+	import { proxy_default } from '$lib/database';
 
 	let token: string;
-	let proxy = 'https://ai.fakeopen.com/api/conversation';
+	let proxy = proxy_default;
 
 	let auth_failed = false;
 

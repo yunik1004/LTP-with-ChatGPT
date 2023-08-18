@@ -3,7 +3,13 @@
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
 	import { ChatBot } from '$lib/chatbot';
-	import { error_thread, info_placeholder, info_thread_init } from '$lib/textbase';
+	import {
+		command_thread_riddle,
+		error_thread,
+		info_placeholder,
+		info_thread_init,
+		query_thread_riddle
+	} from '$lib/textbase';
 	import Bubble from './bubble.svelte';
 
 	type LogVisual = {
@@ -34,6 +40,11 @@
 		// Update conversation log
 		const log: LogVisual = { isUser: true, content: question };
 		logs_visual = [...logs_visual, log];
+
+		if (question === command_thread_riddle) {
+			chatbot.resetThread();
+			question = query_thread_riddle;
+		}
 
 		// Get chatbot response
 		chatbot
