@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { beforeUpdate, afterUpdate } from 'svelte';
+	import { afterUpdate, onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
-	import { ChatAPI } from '$lib/chatapi';
 	import { ChatBot } from '$lib/chatbot';
+	import { error_thread, info_placeholder, info_thread_init } from '$lib/textbase';
 	import Bubble from './bubble.svelte';
 
 	type LogVisual = {
@@ -11,17 +11,15 @@
 		content: string;
 	};
 
-	let chatapi: ChatAPI;
 	let chatbot: ChatBot;
 
-	let logs_visual: Array<LogVisual> = [];
+	let logs_visual: Array<LogVisual> = [{ isUser: false, content: info_thread_init }];
 	let form: HTMLFormElement;
 	let question: string;
 
-	beforeUpdate(async () => {
+	onMount(async () => {
 		try {
-			chatapi = ChatAPI.getInstance();
-			chatbot = new ChatBot(chatapi);
+			chatbot = ChatBot.getInstance();
 		} catch (error) {
 			console.log(error);
 			goto(base + '/login');
@@ -38,15 +36,15 @@
 		logs_visual = [...logs_visual, log];
 
 		// Get chatbot response
-		chatapi
-			.sendMessage(question)
+		chatbot
+			.sendThreadMessage(question)
 			.then((res) => {
-				const log_res: LogVisual = { isUser: false, content: res.text };
+				const log_res: LogVisual = { isUser: false, content: res };
 				logs_visual = [...logs_visual, log_res];
 			})
 			.catch((err) => {
 				console.log(err);
-				const log_err: LogVisual = { isUser: false, content: '오류가 발생했어요' };
+				const log_err: LogVisual = { isUser: false, content: error_thread };
 				logs_visual = [...logs_visual, log_err];
 			});
 
@@ -78,7 +76,7 @@
 			<div class="w-full">
 				<textarea
 					class="textarea textarea-bordered items-center grid-flow-col w-full"
-					placeholder="질문을 입력해주세요"
+					placeholder={info_placeholder}
 					bind:value={question}
 					on:keydown={onKeyDown}
 				/>
